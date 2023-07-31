@@ -5,5 +5,4 @@ export interface IUsuario {
   idPessoa: number
   createdAt: string
   updatedAt: string
-  roles: any
 }
