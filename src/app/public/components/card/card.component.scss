@@ -1,0 +1,39 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .card {
+    padding: 1.5rem;
+    border-radius: .5rem;
+    width: min(400px, 90%);
+
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+    position: relative;
+
+    .loading {
+      top: 0;
+      left: 0;
+      width: 100%;
+      position: absolute;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      span {
+        font-weight: 500;
+        font-size: 2rem;
+      }
+    }
+  }
+}

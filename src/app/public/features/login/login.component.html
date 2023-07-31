@@ -1,0 +1,20 @@
+<app-card title="Entrar">
+  <mat-progress-bar loading mode="indeterminate" *ngIf="loading$ | async"></mat-progress-bar>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input formControlName="email" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Senha</mat-label>
+      <input type="password" formControlName="password" matInput>
+    </mat-form-field>
+    <button mat-flat-button color="primary" [disabled]="form.invalid || (loading$ | async)">Enviar</button>
+  </form>
+  <div class="divider">
+    <div></div>
+    <span>OU</span>
+    <div></div>
+  </div>
+  <button mat-button color="primary" [disabled]="loading$ | async" [routerLink]="['..', 'signup']">Criar uma conta</button>
+</app-card>
