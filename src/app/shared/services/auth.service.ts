@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, first, tap } from 'rxjs';
+import { BehaviorSubject, first, map, tap } from 'rxjs';
 import { environment } from 'src/environment/environment';
 import { ILoginRequest, ILoginResponse } from '../json/auth/login';
 import { ISignupRequest, ISignupResponse } from '../json/auth/signup';
@@ -19,13 +19,21 @@ export class AuthService {
   public readonly usuario$ = this._usuario$.asObservable();
 
   private send(endpoint: 'login' | 'register', body: any) {
+    var headers_object = new HttpHeaders()
+      .append("Authorization", "Basic " + btoa(`${body.email}:${body.passwordConfirm}`));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+
     return this._http
-    .post<ILoginResponse>(`${this._baseUrl}${endpoint}`, body)
-    .pipe(
-      first(),
-      tap(_ => this.setStorage<IToken>('token', {..._.data})),
-      tap(_ => this.setStorage<IUsuario>('user', _.data.usuario))
-    );
+      .post<ILoginResponse>(`${this._baseUrl}${endpoint}`, {}, httpOptions)
+      .pipe(
+        first(),
+        tap(_ => this.setStorage<IToken>('token', { ..._.data })),
+        tap(_ => this.setStorage<IUsuario>('user', _.data.usuario))
+      )
+      ;
   }
 
   public login(body: ILoginRequest) {

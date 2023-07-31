@@ -27,9 +27,15 @@ export class LoginComponent extends FormComponent {
         ...this.form.value,
         passwordConfirm: this.form.value.password,
       })
-      .subscribe((_) => {
-        this._router.navigate(['private']);
-        console.log('inferno');
+      .subscribe({
+        next: () => {
+          this._router.navigate(['private/home']);
+        }, 
+        error: (e) => {
+          console.log(e.error.error)
+        }
       });
   }
 }
+
+// 
