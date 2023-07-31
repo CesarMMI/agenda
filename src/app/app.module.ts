@@ -10,6 +10,7 @@ import { BaseComponent } from './shared/components/base.component';
 import { redirectGuard } from './shared/guards/redirect.guard';
 
 @NgModule({
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
